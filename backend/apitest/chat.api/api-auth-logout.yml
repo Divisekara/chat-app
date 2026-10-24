@@ -1,0 +1,22 @@
+info:
+  name: /api/auth/logout
+  type: http
+  seq: 4
+
+http:
+  method: post
+  url: http://localhost:8080/api/auth/logout
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
