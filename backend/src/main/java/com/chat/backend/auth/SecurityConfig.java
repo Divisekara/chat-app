@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .securityContext(sc -> sc.securityContextRepository(repo))
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers("/api/auth/register", "/api/auth/login", "/actuator/health").permitAll()
+                        .requestMatchers("/api/auth/register", "/api/auth/login", "/actuator/health", "/error").permitAll()
                         .anyRequest()
                         .authenticated())
                 // An API must answer 401, not redirect to a login page the SPA can't use.
