@@ -13,8 +13,8 @@ http:
     type: json
     data: |-
       {
-        "username": "bob",
-        "password": "password321"
+        "username": "asitha",
+        "password": "usualPassword"
       }
   auth: inherit
 

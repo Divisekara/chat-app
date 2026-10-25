@@ -1,0 +1,29 @@
+info:
+  name: /api/conversations/:id/messages
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: http://localhost:8080/api/conversations/:id/messages?afterSeq=2&limit=1
+  params:
+    - name: afterSeq
+      value: "2"
+      type: query
+    - name: limit
+      value: "1"
+      type: query
+    - name: id
+      value: 6e72dc2f-3f99-48be-86fa-468459a53cf8
+      type: path
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
