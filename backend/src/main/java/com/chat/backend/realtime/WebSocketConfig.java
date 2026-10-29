@@ -1,5 +1,6 @@
 package com.chat.backend.realtime;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -12,9 +13,12 @@ import org.springframework.web.socket.server.standard.ServletServerContainerFact
 public class WebSocketConfig implements WebSocketConfigurer {
 
     private final ChatWebSocketHandler handler;
+    private final String[] allowedOrigins;
 
-    public WebSocketConfig(ChatWebSocketHandler handler) {
+    public WebSocketConfig(ChatWebSocketHandler handler,
+                           @Value("${app.allowed-origins:http://localhost:5173,http://localhost:8080}") String[] allowedOrigins) {
         this.handler = handler;
+        this.allowedOrigins = allowedOrigins;
     }
 
     @Override
@@ -22,10 +26,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
         // WebSockets are not covered by CORS, so a malicious page could open one using the
         // victim's session cookie. The explicit Origin allowlist is what stops that.
         registry.addHandler(handler, "/ws")
-                .setAllowedOriginPatterns(
-                        "http://localhost:5173", // todo explain
-                        "http://localhost:8080"
-                );
+                .setAllowedOriginPatterns(allowedOrigins);
     }
 
     @Bean
