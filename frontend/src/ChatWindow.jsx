@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react'
 
 const time = (iso) => new Date(iso).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
 
-export default function ChatWindow({active, /* FIXME me, */messages, pending, onSend, onLoadOlder}) {
+export default function ChatWindow({active, me, messages, pending, onSend, onLoadOlder}) {
     const [text, setText] = useState('')
     const bottom = useRef(null)
     const newest = messages.at(-1)?.seq
@@ -22,23 +22,23 @@ export default function ChatWindow({active, /* FIXME me, */messages, pending, on
     }
 
     return (
-        <div>
-            <div>{active.otherUsername}</div>
+        <div className="chat">
+            <div className="head">{active.otherUsername}</div>
 
-            <div>
+            <div className="msgs">
                 {messages.length > 0 && messages[0].seq > 1 && (
-                    <button onClick={onLoadOlder}>Load older messages</button>
+                    <button className="older" onClick={onLoadOlder}>Load older messages</button>
                 )}
 
                 {messages.map((m) => (
-                    <div key={m.seq}>
+                    <div key={m.seq} className={`msg ${m.senderId === me.id ? 'mine' : ''}`}>
                         {m.body}
                         <small>{time(m.createdAt)}</small>
                     </div>
                 ))}
 
                 {pending.map((p) => (
-                    <div key={p.clientMsgId}>
+                    <div key={p.clientMsgId} className={`msg mine ${p.error ? 'failed' : ''}`}>
                         {p.body}
                         <small>{p.error ? `Failed to send (${p.error})` : 'sending...'}</small>
                     </div>
@@ -47,7 +47,7 @@ export default function ChatWindow({active, /* FIXME me, */messages, pending, on
                 <div ref={bottom}/>
             </div>
 
-            <form onSubmit={submit}>
+            <form className="compose" onSubmit={submit}>
                 <input placeholder="Type a message" value={text} maxLength={4000} autoFocus
                        onChange={(e) => setText(e.target.value)}/>
 

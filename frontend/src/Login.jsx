@@ -41,7 +41,7 @@ export default function Login({onLogin}) {
 
                 <button disabled={busy}>{mode === 'login' ? 'Sign in' : 'Register'}</button>
 
-                <button type="button" onClick={() => setMode(mode === 'login' ? 'register' : 'login')}>
+                <button type="button" className="link" onClick={() => setMode(mode === 'login' ? 'register' : 'login')}>
                     {mode === 'login' ? 'Need an account? Register' : 'Have an account? Sign in'}
                 </button>
             </form>
