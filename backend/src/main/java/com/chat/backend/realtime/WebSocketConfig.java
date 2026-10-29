@@ -33,7 +33,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     ServletServerContainerFactoryBean webSocketContainer() {
         var c = new ServletServerContainerFactoryBean();
         // Bounds memory per frame; the app-level limit is 4000 chars.
-        c.setMaxTextMessageBufferSize(16 * 1024); // // todo explain
+        c.setMaxTextMessageBufferSize(16 * 1024);
         return c;
     }
 }

@@ -1,3 +1,11 @@
+/**
+ * Every call to our own backend goes through here.
+ *
+ * URLs are relative ("/api/...") on purpose: the browser talks to a single origin (the
+ * Vite proxy in dev, nginx in Docker). That is why the session cookie is sent
+ * automatically and no CORS configuration is needed. There is no token handling either:
+ * the session cookie is HttpOnly, so JavaScript can't read it and doesn't need to.
+ */
 export async function api(path, {method = 'GET', body} = {}) {
     const res = await fetch(path, {
         method,

@@ -74,7 +74,7 @@ public class ConversationController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        int max = Math.max(1, Math.min(limit, 100)); // never let a client request an unbounded page // todo - explain
+        int max = Math.max(1, Math.min(limit, 100)); // never let a client request an unbounded page
 
         var mapper = (org.springframework.jdbc.core.RowMapper<MessageDto>) (rs, i) -> new MessageDto(
                 rs.getLong(1), rs.getObject(2, UUID.class), rs.getString(3),
