@@ -19,5 +19,5 @@ export default function App() {
     if (me === undefined) return <div className="center">Loading...</div>
     if (me === null) return <Login onLogin={setMe}/>
 
-    return <ChatApp me={me} onLogout={logout} onSessionExpired={() => setMe(null)}/> // FIXME
+    return <ChatApp me={me} onLogout={logout} onSessionExpired={() => setMe(null)}/>
 }

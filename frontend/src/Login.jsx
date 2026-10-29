@@ -2,7 +2,7 @@ import {useState} from "react"
 import {api} from "./api.js"
 
 export default function Login({onLogin}) {
-    const [mode, setMode] = useState('login') // mode - register | login | logout
+    const [mode, setMode] = useState('login') // mode - register | login
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -19,7 +19,7 @@ export default function Login({onLogin}) {
                 err.status === 401 ? 'Wrong username or password'
                     : err.status === 409 ? 'Username already taken'
                         : err.status === 400 ? 'Username: 3-30 letters, digits or _. Password: 8-72 characters'
-                            : ''
+                            : 'Something went wrong, try again'
             )
         } finally {
             setBusy(false) // await is over
