@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/chat
-    username: admin
-    password: password
+    username: chat
+    password: chat
   jpa:
     hibernate:
       ddl-auto: validate
